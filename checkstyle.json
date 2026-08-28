@@ -71,7 +71,7 @@
     {
       "props": {
         "ignoreExtern": true,
-        "format": "^[a-z][A-Z][A-Z0-9]*(_[A-Z0-9_]+)*$",
+        "format": "",
         "tokens": ["INLINE", "NOTINLINE"]
       },
       "type": "ConstantName"
@@ -533,13 +533,13 @@
     },
     {
       "props": {
-        "spaceIfCondition": "should",
+        "spaceIfCondition": "should_not",
         "spaceAroundBinop": true,
-        "spaceForLoop": "should",
+        "spaceForLoop": "should_not",
         "ignoreRangeOperator": true,
-        "spaceWhileLoop": "should",
-        "spaceCatch": "should",
-        "spaceSwitchCase": "should",
+        "spaceWhileLoop": "should_not",
+        "spaceCatch": "should_not",
+        "spaceSwitchCase": "should_not",
         "noSpaceAroundUnop": true
       },
       "type": "Spacing"
@@ -609,7 +609,7 @@
     },
     {
       "props": {
-        "typeHintPolicy": "enforce_all",
+        "typeHintPolicy": "infer_new_or_const",
         "ignoreEnumAbstractValues": true
       },
       "type": "VarTypeHint"
