@@ -9,7 +9,5 @@ typedef ChangeCharacterData = {
     xOffset:Float,
     yOffset:Float,
     xCameraOffset:Float,
-    yCameraOffset:Float,
-    changeIcon:Bool,
-    antialiasing:Bool
+    yCameraOffset:Float
 }

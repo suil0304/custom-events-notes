@@ -1,51 +1,44 @@
 package events.change_character;
 
+// suil
+import events.EventHandlerOwner;
+import events.change_character.ChangeCharacterHandler;
+import data.CharacterPosition;
+
 // funkin
 import funkin.data.song.SongData.SongEventData;
 import funkin.data.event.SongEventSchema;
-import funkin.play.event.SongEvent;
-import funkin.data.character.CharacterData.CharacterDataParser;
+import funkin.modding.module.ModuleHandler;
 
-// haxe
-import haxe.ds.StringMap;
-
-class ChangeCharacter extends SongEvent {
+class ChangeCharacter extends EventHandlerOwner<ChangeCharacterData, ChangeCharacterHandler> {
     public function new(?id:String) {
         super(id == null ? SuilNamingUtil.getSuildId("change-character") : id);
+
+        handler = cast ModuleHandler.getModule(SuilNamingUtil.getSuildId("change-character-handler"));
     }
 
     public override function handleEvent(data:SongEventData) {
-        super.handleEvent(data);
+        handler.handleEvent(EventUtil.getAutoSchemaEventProperties(data, getEventSchema()));
     }
 
-    private static var charIds:Null<StringMap<String>> = null;
     public override function getEventSchema():Null<SongEventSchema> {
-        if(charIds == null) {
-            charIds = new StringMap();
-            var ids:Array<String> = CharacterDataParser.listCharacterIds();
-
-            for(id in ids) {
-                charIds.set(id, id);
-            }
-        }
-
         return new SongEventSchema([
             {
                 title: "Character Position",
-                name: "char-pos",
+                name: "charPos",
                 type: ENUM,
                 keys: [
-                    "Boyfriend" => "bf",
-                    "Daddy" => "dad",
-                    "Girlfriend" => "gf"
+                    "Boyfriend" => CharacterPosition.BF,
+                    "Daddy" => CharacterPosition.DAD,
+                    "Girlfriend" => CharacterPosition.GF
                 ],
-                defaultValue: "bf"
+                defaultValue: CharacterPosition.BF
             },
             {
                 title: "New Character ID",
-                name: "new-char-id",
+                name: "newCharId",
                 type: ENUM,
-                keys: charIds,
+                keys: handler.charIds,
                 defaultValue: "bf"
             },
             {
@@ -56,51 +49,31 @@ class ChangeCharacter extends SongEvent {
                 children: [
                     {
                         title: "X Offset",
-                        name: "x-offset",
+                        name: "xOffset",
                         type: FLOAT,
                         step: 0.01,
                         defaultValue: 0.0
                     },
                     {
                         title: "Y Offset",
-                        name: "Y-offset",
+                        name: "yOffset",
                         type: FLOAT,
                         step: 0.01,
                         defaultValue: 0.0
                     },
                     {
                         title: "Camera X Offset",
-                        name: "camera-x-offset",
+                        name: "xCameraOffset",
                         type: FLOAT,
                         step: 0.01,
                         defaultValue: 0.0
                     },
                     {
                         title: "Camera Y Offset",
-                        name: "Camera Y-offset",
+                        name: "yCameraOffset",
                         type: FLOAT,
                         step: 0.01,
                         defaultValue: 0.0
-                    }
-                ]
-            },
-            {
-                title: "Advance",
-                name: "advance",
-                type: FRAME,
-                collapsible: true,
-                children: [
-                    {
-                        title: "Change Icon",
-                        name: "change-icon",
-                        type: BOOL,
-                        defaultValue: true
-                    },
-                    {
-                        title: "Anti-Aliasing",
-                        name: "anti-aliasing",
-                        type: BOOL,
-                        defaultValue: true
                     }
                 ]
             }
