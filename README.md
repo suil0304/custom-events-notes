@@ -4,4 +4,5 @@ A little pack of useful events/notes for V-Slice.
 
 WIP
 
-Still writing...
+I'm waiting for .cppia update
+shit
