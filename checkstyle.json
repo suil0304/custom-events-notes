@@ -136,11 +136,11 @@
     {
       "props": {
         "requireEmptyLineAfterPackage": true,
-        "requireEmptyLineAfterInterface": true,
-        "requireEmptyLineAfterAbstract": true,
+        "requireEmptyLineAfterInterface": false,
+        "requireEmptyLineAfterAbstract": false,
         "allowEmptyLineAfterSingleLineComment": true,
         "max": 4,
-        "requireEmptyLineAfterClass": true,
+        "requireEmptyLineAfterClass": false,
         "allowEmptyLineAfterMultiLineComment": true
       },
       "type": "EmptyLines"
@@ -223,7 +223,7 @@
     },
     {
       "props": {
-        "allowProperties": false,
+        "allowProperties": true,
         "allowMarkerInterfaces": true
       },
       "type": "Interface"
@@ -266,13 +266,13 @@
     {
       "props": {
         "format": "^[A-Z][a-zA-Z0-9]*$",
-        "tokens": ["ABSTRACT"]
+        "tokens": ["ENUM"]
       },
       "type": "MemberName"
     },
     {
       "props": {
-        "format": "^[_a-zA-Z][a-z][a-zA-Z0-9]*$",
+        "format": "",
         "tokens": ["ABSTRACT"]
       },
       "type": "MemberName"
